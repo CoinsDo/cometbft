@@ -54,8 +54,11 @@ func (pubKey PubKey) VerifySignature(msg []byte, sig []byte) bool {
 	if err != nil {
 		return false
 	}
-
-	return publicKey.Verify(signature, signingContext)
+	result, err := publicKey.Verify(signature, signingContext)
+	if err != nil {
+		return false
+	}
+	return result
 }
 
 func (pubKey PubKey) String() string {
